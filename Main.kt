@@ -51,12 +51,16 @@ class hechizero(val tipo_hechizero:String,val danio_magico:UInt,var capacidad_sa
         return puntosVida
     }
 }
-//COMO Q ESTO SE PODÍA HACER
+//Preguntas
+//1-Es una especialización, pues con las dos subclases determino que tipo de personaje son
+//2-La superclase es personaje y las subclases son guerrero y hechizero
+//3-No hay otro método de aplicarlo
+//4-Ayuda bastante más a la hora satisfacer las necesidades que tengamos mientras desarrollamos un programa
 fun main(){
     val Naomi=personaje("Naomi",100u,50u,60u,"Alto")
     val Guts = guerrero("Mandoble",200u)
-    val sachi = hechizero("Tierra",80u,60u)
+    val Sachi = hechizero("Tierra",80u,60u)
     println(Naomi.toString())
     println(Guts.toString())
-    println(sachi.toString())
+    println(Sachi.toString())
 }

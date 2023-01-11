@@ -1,5 +1,5 @@
 /*Especialización*/
-open class personaje(val nombre:String , var puntosVida:UInt, var damage:UInt, var defensa:UInt,var rango:String){
+open class personaje(var puntosVida:UInt, var damage:UInt, var defensa:UInt,var rango:String){
 
     init {
         require(rango == "Enorme" || rango == "Alto" || rango == "Mediano" || rango == "Pequeño")
@@ -12,7 +12,9 @@ open class personaje(val nombre:String , var puntosVida:UInt, var damage:UInt, v
        puntosVida-=damage-defensa /*Los puntos de vida se vuelven el resultado final de el daño menos la defensa*/
        return puntosVida
     }
-
+    open fun texto_ataque:String{
+        return "¡Personaje ha hecho $damage puntos de daño!"
+    }
     override fun toString(): String {
         return "El personaje se llama $nombre, tiene $puntosVida puntos de vida , hace $damage de daño , tiene " +
                 "$defensa de resistencia y tiene un rango $rango"
@@ -20,17 +22,21 @@ open class personaje(val nombre:String , var puntosVida:UInt, var damage:UInt, v
 }
 
 
-class guerrero(val arma:String, var danio_arma:UInt):personaje
+class guerrero(val nombre:String , val arma:String, var danio_arma:UInt):personaje
     ("Guts", 100u,100u, 100u,"Pequeño"){
     override fun atacar():UInt{
         return damage+danio_arma
+    }
+
+    override fun texto_ataque(): String {
+        return "$nombre ha metido un espadazo que ha hecho ${atacar()} puntos de daño"
     }
     override fun toString(): String {
         return "El personaje se llama $nombre, tiene $puntosVida puntos de vida , hace ${atacar()} de " +
                 "daño , tiene  $defensa de resistencia, su arma es $arma tiene un rango $rango"
     }
     }
-class hechizero(val tipo_hechizero:String,val danio_magico:UInt,var capacidad_sanar:UInt):personaje
+class hechizero(val nombre:String , val tipo_hechizero:String,val danio_magico:UInt,var capacidad_sanar:UInt):personaje
     ("Sachi",100u,100u,0u,"Enorme"){
     init {
         require(tipo_hechizero == "Sanador" || tipo_hechizero =="Tierra" || tipo_hechizero == "Agua" ||
@@ -46,9 +52,16 @@ class hechizero(val tipo_hechizero:String,val danio_magico:UInt,var capacidad_sa
         return "El personaje se llama $nombre, tiene $puntosVida puntos de vida , hace ${atacar()} de daño , tiene " +
                 "$defensa de resistencia, tiene un rango $rango y es un hechizero de tipo $tipo_hechizero"
     }
+
+    override fun texto_ataque(): String {
+        return "$nombre usó un gran hechizo e hizo ${atacar()} puntos de daño"
+    }
     fun sanar():UInt{
         puntosVida+=capacidad_sanar
         return puntosVida
+    }
+    fun texto_sanacion():String{
+        return "$nombre sanó $capacidad_sanar puntos de vida"
     }
 }
 //Preguntas
@@ -56,11 +69,11 @@ class hechizero(val tipo_hechizero:String,val danio_magico:UInt,var capacidad_sa
 //2-La superclase es personaje y las subclases son guerrero y hechizero
 //3-No hay otro método de aplicarlo
 //4-Ayuda bastante más a la hora satisfacer las necesidades que tengamos mientras desarrollamos un programa
+
+
 fun main(){
-    val Naomi=personaje("Naomi",100u,50u,60u,"Alto")
-    val Guts = guerrero("Mandoble",200u)
-    val Sachi = hechizero("Tierra",80u,60u)
-    println(Naomi.toString())
-    println(Guts.toString())
-    println(Sachi.toString())
+    val Guts = guerrero("Guts","Mandoble",200u)
+    val Sachi = hechizero("Sachi","Tierra",80u,60u)
+    println(Guts.texto_ataque())
+    println(Sachi.texto_sanacion())
 }

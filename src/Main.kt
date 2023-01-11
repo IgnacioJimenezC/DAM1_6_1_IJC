@@ -9,21 +9,21 @@ open class personaje(var puntosVida:UInt, var damage:UInt, var defensa:UInt,var 
         return damage
     }
     fun recibirDanio():UInt{
-       puntosVida-=damage-defensa /*Los puntos de vida se vuelven el resultado final de el daño menos la defensa*/
-       return puntosVida
+        puntosVida-=damage-defensa /*Los puntos de vida se vuelven el resultado final de el daño menos la defensa*/
+        return puntosVida
     }
-    open fun texto_ataque:String{
+    open fun texto_ataque():String{
         return "¡Personaje ha hecho $damage puntos de daño!"
     }
     override fun toString(): String {
-        return "El personaje se llama $nombre, tiene $puntosVida puntos de vida , hace $damage de daño , tiene " +
+        return "Tiene $puntosVida puntos de vida , hace $damage de daño , tiene " +
                 "$defensa de resistencia y tiene un rango $rango"
     }
 }
 
 
 class guerrero(val nombre:String , val arma:String, var danio_arma:UInt):personaje
-    ("Guts", 100u,100u, 100u,"Pequeño"){
+    (100u,100u, 100u,"Pequeño"){
     override fun atacar():UInt{
         return damage+danio_arma
     }
@@ -35,9 +35,9 @@ class guerrero(val nombre:String , val arma:String, var danio_arma:UInt):persona
         return "El personaje se llama $nombre, tiene $puntosVida puntos de vida , hace ${atacar()} de " +
                 "daño , tiene  $defensa de resistencia, su arma es $arma tiene un rango $rango"
     }
-    }
+}
 class hechizero(val nombre:String , val tipo_hechizero:String,val danio_magico:UInt,var capacidad_sanar:UInt):personaje
-    ("Sachi",100u,100u,0u,"Enorme"){
+    (100u,100u,0u,"Enorme"){
     init {
         require(tipo_hechizero == "Sanador" || tipo_hechizero =="Tierra" || tipo_hechizero == "Agua" ||
                 tipo_hechizero == "Aire" || tipo_hechizero=="Fuego" || tipo_hechizero=="Todoterreno"){

@@ -71,9 +71,3 @@ class hechizero(val nombre:String , val tipo_hechizero:String,val danio_magico:U
 //4-Ayuda bastante más a la hora satisfacer las necesidades que tengamos mientras desarrollamos un programa
 
 
-fun main(){
-    val Guts = guerrero("Guts","Mandoble",200u)
-    val Sachi = hechizero("Sachi","Tierra",80u,60u)
-    println(Guts.texto_ataque())
-    println(Sachi.texto_sanacion())
-}
